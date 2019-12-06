@@ -39,7 +39,7 @@
             <activity
                 android:name="com.mattrayner.vuforia.app.ImageTargets"
                 android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-                android:screenOrientation="landscape"
+                android:launchMode="singleTask"
                 android:noHistory="true">
             </activity>
         </config-file>
@@ -75,19 +75,27 @@
                      target-dir="src/java/com/mattrayner/vuforia/app" />
         <source-file src="src/android/java/com/mattrayner/vuforia/app/ImageTargetRenderer.java"
                      target-dir="src/java/com/mattrayner/vuforia/app" />
-        <source-file src="src/android/java/com/mattrayner/vuforia/app/ApplicationControl.java"
+        <source-file src="src/android/java/com/mattrayner/vuforia/app/SampleActivityBase.java"
                      target-dir="src/java/com/mattrayner/vuforia/app" />
-        <source-file src="src/android/java/com/mattrayner/vuforia/app/ApplicationException.java"
+        <source-file src="src/android/java/com/mattrayner/vuforia/app/SampleApplicationControl.java"
                      target-dir="src/java/com/mattrayner/vuforia/app" />
-        <source-file src="src/android/java/com/mattrayner/vuforia/app/ApplicationSession.java"
+        <source-file src="src/android/java/com/mattrayner/vuforia/app/SampleApplicationException.java"
+                     target-dir="src/java/com/mattrayner/vuforia/app" />
+        <source-file src="src/android/java/com/mattrayner/vuforia/app/SampleApplicationSession.java"
+                     target-dir="src/java/com/mattrayner/vuforia/app" />
+        <source-file src="src/android/java/com/mattrayner/vuforia/app/SampleAppRenderer.java"
+                     target-dir="src/java/com/mattrayner/vuforia/app" />
+        <source-file src="src/android/java/com/mattrayner/vuforia/app/SampleAppRendererControl.java"
+                     target-dir="src/java/com/mattrayner/vuforia/app" />
+        <source-file src="src/android/java/com/mattrayner/vuforia/app/SampleRendererBase.java"
                      target-dir="src/java/com/mattrayner/vuforia/app" />
         <source-file src="src/android/java/com/mattrayner/vuforia/app/utils/LoadingDialogHandler.java"
                      target-dir="src/java/com/mattrayner/vuforia/app/utils" />
-        <source-file src="src/android/java/com/mattrayner/vuforia/app/utils/MeshObject.java"
+        <source-file src="src/android/java/com/mattrayner/vuforia/app/utils/SampleApplicationGLView.java"
                      target-dir="src/java/com/mattrayner/vuforia/app/utils" />
-        <source-file src="src/android/java/com/mattrayner/vuforia/app/utils/ApplicationGLView.java"
+        <source-file src="src/android/java/com/mattrayner/vuforia/app/utils/SampleUtils.java"
                      target-dir="src/java/com/mattrayner/vuforia/app/utils" />
-        <source-file src="src/android/java/com/mattrayner/vuforia/app/utils/Texture.java"
+        <source-file src="src/android/java/com/mattrayner/vuforia/app/utils/VideoBackgroundShader.java"
                      target-dir="src/java/com/mattrayner/vuforia/app/utils" />
 
         <!-- Include our resources -->
@@ -142,5 +150,6 @@
         <resource-file src="src/ios/Assets/ImageTargets/iOSDevices.png" target-dir="Resources" />
     </platform>
 
-    <dependency id="cordova-plugin-vuforia-sdk" version="6.x.x" />
+    <!-- Requires vuforia sdk - this url/commit pair points to a branch that has older ios sdk 6.0.117 and android sdk 8.5.8-->
+    <dependency url="https://github.com/ankugupta/cordova-plugin-vuforia-sdk.git" commit="sdk-updated" />
 </plugin>

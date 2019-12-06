@@ -1,8 +1,10 @@
 /*===============================================================================
+Copyright (c) 2016-2018 PTC Inc. All Rights Reserved.
+
 Copyright (c) 2012-2014 Qualcomm Connected Experiences, Inc. All Rights Reserved.
 
-Vuforia is a trademark of QUALCOMM Incorporated, registered in the United States 
-and other countries. Trademarks of QUALCOMM Incorporated are used with permission.
+Vuforia is a trademark of PTC Inc., registered in the United States and other 
+countries.
 ===============================================================================*/
 
 package com.mattrayner.vuforia.app.utils;
@@ -17,23 +19,24 @@ import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
-// Support class for the Vuforia sample applications
-// Responsible for setting up and configuring the OpenGL surface view.
-// This class does not contain any Vuforia specific code. 
-// You can use your own OpenGL implementation.
-public class ApplicationGLView extends GLSurfaceView
+
+/**
+ * Support class for the Vuforia Engine sample applications
+ * Responsible for setting up and configuring the OpenGL surface view.
+ *
+ * This class does not contain any Vuforia Engine specific code.
+ * You can use your own OpenGL implementation.
+ */
+public class SampleApplicationGLView extends GLSurfaceView
 {
-    private static final String LOGTAG = "Vuforia_GLView";
-    
-    
-    // Constructor.
-    public ApplicationGLView(Context context)
+    private static final String LOGTAG = "VuforiaEngine_SampleGLView";
+
+    public SampleApplicationGLView(Context context)
     {
         super(context);
     }
     
-    
-    // Initialization.
+
     public void init(boolean translucent, int depth, int stencil)
     {
         // By default GLSurfaceView tries to find a surface that is as close
@@ -72,7 +75,7 @@ public class ApplicationGLView extends GLSurfaceView
     private static class ContextFactory implements
         GLSurfaceView.EGLContextFactory
     {
-        private static int EGL_CONTEXT_CLIENT_VERSION = 0x3098;
+        private static final int EGL_CONTEXT_CLIENT_VERSION = 0x3098;
         
         
         public EGLContext createContext(EGL10 egl, EGLDisplay display,
@@ -99,8 +102,7 @@ public class ApplicationGLView extends GLSurfaceView
         }
     }
     
-    
-    // Checks the OpenGL error.
+
     private static void checkEglError(String prompt, EGL10 egl)
     {
         int error;
@@ -109,12 +111,11 @@ public class ApplicationGLView extends GLSurfaceView
             Log.e(LOGTAG, String.format("%s: EGL error: 0x%x", prompt, error));
         }
     }
-    
-    // The config chooser.
+
     private static class ConfigChooser implements
         GLSurfaceView.EGLConfigChooser
     {
-        public ConfigChooser(int r, int g, int b, int a, int depth, int stencil)
+        private ConfigChooser(int r, int g, int b, int a, int depth, int stencil)
         {
             mRedSize = r;
             mGreenSize = g;
@@ -162,15 +163,15 @@ public class ApplicationGLView extends GLSurfaceView
         }
         
         
-        public EGLConfig chooseConfig(EGL10 egl, EGLDisplay display,
+        private EGLConfig chooseConfig(EGL10 egl, EGLDisplay display,
             EGLConfig[] configs)
         {
             for (EGLConfig config : configs)
             {
                 int d = findConfigAttrib(egl, display, config,
-                    EGL10.EGL_DEPTH_SIZE, 0);
+                    EGL10.EGL_DEPTH_SIZE);
                 int s = findConfigAttrib(egl, display, config,
-                    EGL10.EGL_STENCIL_SIZE, 0);
+                    EGL10.EGL_STENCIL_SIZE);
                 
                 // We need at least mDepthSize and mStencilSize bits
                 if (d < mDepthSize || s < mStencilSize)
@@ -178,13 +179,13 @@ public class ApplicationGLView extends GLSurfaceView
                 
                 // We want an *exact* match for red/green/blue/alpha
                 int r = findConfigAttrib(egl, display, config,
-                    EGL10.EGL_RED_SIZE, 0);
+                    EGL10.EGL_RED_SIZE);
                 int g = findConfigAttrib(egl, display, config,
-                    EGL10.EGL_GREEN_SIZE, 0);
+                    EGL10.EGL_GREEN_SIZE);
                 int b = findConfigAttrib(egl, display, config,
-                    EGL10.EGL_BLUE_SIZE, 0);
+                    EGL10.EGL_BLUE_SIZE);
                 int a = findConfigAttrib(egl, display, config,
-                    EGL10.EGL_ALPHA_SIZE, 0);
+                    EGL10.EGL_ALPHA_SIZE);
                 
                 if (r == mRedSize && g == mGreenSize && b == mBlueSize
                     && a == mAlphaSize)
@@ -196,22 +197,22 @@ public class ApplicationGLView extends GLSurfaceView
         
         
         private int findConfigAttrib(EGL10 egl, EGLDisplay display,
-            EGLConfig config, int attribute, int defaultValue)
+            EGLConfig config, int attribute)
         {
             
             if (egl.eglGetConfigAttrib(display, config, attribute, mValue))
                 return mValue[0];
             
-            return defaultValue;
+            return 0;
         }
         
         // Subclasses can adjust these values:
-        protected int mRedSize;
-        protected int mGreenSize;
-        protected int mBlueSize;
-        protected int mAlphaSize;
-        protected int mDepthSize;
-        protected int mStencilSize;
-        private int[] mValue = new int[1];
+        private final int mRedSize;
+        private final int mGreenSize;
+        private final int mBlueSize;
+        private final int mAlphaSize;
+        private final int mDepthSize;
+        private final int mStencilSize;
+        private final int[] mValue = new int[1];
     }
 }

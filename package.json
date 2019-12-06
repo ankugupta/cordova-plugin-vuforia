@@ -49,6 +49,6 @@
   "author": "Matthew Rayner",
   "license": "MIT",
   "dependencies": {
-    "cordova-plugin-vuforia-sdk": "6.x.x"
+    "cordova-plugin-vuforia-sdk": "https://github.com/ankugupta/cordova-plugin-vuforia-sdk.git#sdk-updated"
   }
 }
