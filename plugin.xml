@@ -151,5 +151,5 @@
     </platform>
 
     <!-- Requires vuforia sdk - this url/commit pair points to a branch that has older ios sdk 6.0.117 and android sdk 8.5.8-->
-    <dependency url="https://github.com/ankugupta/cordova-plugin-vuforia-sdk.git" commit="sdk-updated" />
+    <dependency id="cordova-plugin-vuforia-sdk" url="https://github.com/ankugupta/cordova-plugin-vuforia-sdk.git" commit="sdk-updated" />
 </plugin>
