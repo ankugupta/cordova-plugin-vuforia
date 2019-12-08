@@ -23,6 +23,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -331,8 +332,10 @@ public class ImageTargets extends SampleActivityBase implements SampleApplicatio
         String package_name = getApplication().getPackageName();
         Resources resources = getApplication().getResources();
 
-        mUILayout = (RelativeLayout) View.inflate(getApplicationContext(), resources.getIdentifier("camera_overlay", "layout", package_name), null);
-        
+      LayoutInflater inflater = LayoutInflater.from(this);
+
+        mUILayout = (RelativeLayout) inflater.inflate(resources.getIdentifier("camera_overlay", "layout", package_name), null, false);
+
         mUILayout.setVisibility(View.VISIBLE);
         mUILayout.setBackgroundColor(Color.BLACK);
 
@@ -349,7 +352,7 @@ public class ImageTargets extends SampleActivityBase implements SampleApplicatio
         Log.d(LOGTAG, "Overlay Text: " + mOverlayMessage);
 
         // Hide the close button if needed
-        Button closeButton = mUILayout.findViewById(resources.getIdentifier("overlay_message_top", "close_button_top", package_name));
+        Button closeButton = mUILayout.findViewById(resources.getIdentifier("close_button_top", "id", package_name));
         if(!mDisplayCloseButton)
             closeButton.setVisibility(View.GONE);
 
