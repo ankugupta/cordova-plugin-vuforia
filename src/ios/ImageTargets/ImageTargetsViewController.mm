@@ -349,7 +349,9 @@
 
 // callback: the AR initialization is done
 - (void) onInitARDone:(NSError *)initError {
-    [self hideLoadingAnimation];
+	dispatch_async( dispatch_get_main_queue(), ^{
+		[self hideLoadingAnimation];
+	});
 
     if (initError == nil) {
 
